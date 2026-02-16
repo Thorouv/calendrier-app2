@@ -10,25 +10,31 @@ export const useDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data: inspections, error } = await supabase
-          .from('inspections')
-          .select('*')
-          .order('echance', { ascending: false });
-        
-        if (error) throw error;
+useEffect(() => {
+  async function fetchData() {
+    setLoading(true);
+    try {
+      const { data: inspections, error } = await supabase
+        .from('inspections')
+        .select('*');
+
+      if (error) {
+        setError(error.message);
+      } else {
         setData(inspections || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
       }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-    fetchData();
-  }, []);
+  }
+
+  fetchData();
+}, []);
+
 
   return { data, loading, error };
 };
+
 
