@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react';  // Garde React
-import { Container, VStack, Heading, Text } from '@chakra-ui/react';  // Garde utilisés
-import { useDashboard } from './hooks/useDashboard';  // Garde
-import DashboardView from './DashboardView';  // Garde
-import AppData from './AppData';  // Garde
+import React from 'react';
+import { Container, VStack, Heading } from '@chakra-ui/react';
+import { useDashboard } from './hooks/useDashboard';
+import DashboardView from './DashboardView';
+import AppData from './AppData';
 
-const App: React.FC = () => {  // Ajoute React.FC
-  const { data, loading, error } = useDashboard();  // Utilise states
+const App: React.FC = () => {
+  const { data, loading, error } = useDashboard();
 
   return (
     <Container maxW="container.xl" p={6}>
       <AppData />
       <VStack gap={6} align="stretch">
-        <Heading>Tableau de bord inspections équipements</Heading>
-        <DashboardView items={data} loading={loading} error={error} onRefresh={() => {}} />
+        <Heading size="2xl" mb={4}>
+          Tableau de bord des inspections d'équipements
+        </Heading>
+        <DashboardView 
+          items={data} 
+          loading={loading} 
+          error={error} 
+          onRefresh={() => {}} 
+        />
       </VStack>
     </Container>
   );
