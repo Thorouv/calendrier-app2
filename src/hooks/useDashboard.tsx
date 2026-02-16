@@ -6,7 +6,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl!, supabaseAnonKey!);
 
 export const useDashboard = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -31,3 +31,4 @@ export const useDashboard = () => {
 
   return { data, loading, error };
 };
+
